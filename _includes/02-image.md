@@ -1,1 +1,1 @@
-Replace this with an image, like your photo. Ensure you include some alt-text.
+![Image of Meerkat - Please Hire Me](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nationalgeographic.com%2Fanimals%2Fmammals%2Fm%2Fmeerkat%2F&psig=AOvVaw2slhYm1aIEVZExyxLNJHWE&ust=1590242136431000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKiRtuXPx-kCFQAAAAAdAAAAABAE)
