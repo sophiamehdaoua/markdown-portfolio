@@ -1,0 +1,37 @@
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import os
+import seaborn as sn
+
+##For all tests
+names = ['Weight', 'Iter', 'Animal', 'ID', 'TP', 'FP', 'FN', 'ACC']
+o_names = ['Weight', 'Iter', 'Precision', 'Recall', 'F1', 'TP', 'FP', 'FN', 'IoU', 'mAP']
+Iter = pd.Series(range(1000,43000,1000))
+Iter_lab = pd.Series(range(5000,43000,5000))
+
+#Read in Data 
+os.chdir("/home/sm/astroeco_ml/data_test/knowsley_eval_results/eval_results_test_3")
+test_K3 = pd.read_csv('overall_test.txt', names = o_names, sep = " ")
+
+#Confusion Matrix
+last = test_K3.iloc[41, 5:8] #we're taking the 'last' (nrow = 41) results from our test
+cm = [[last['TP'], last['FP']],  
+    [last['FN'], 0]]
+    
+fig, ax = plt.subplots(1)
+sn.heatmap(cm, annot = True, fmt = 'd', annot_kws = {'verticalalignment':'center', 
+          'color' : 'white'}, cmap = 'YlGnBu', xticklabels= False, yticklabels=False)
+          #Default labels don't sit right, so have done it manually below 
+plt.ylim(2,-0.5)
+ax.set(xlabel='Truth')
+ax.collections[0].colorbar.ax.set_ylim(20000,44600) 
+#adjust ylim based off the lowest value (generally the FPs), so it's more obvious TN isn't included 
+plt.text(0,-0.3, "Confusion Matrix : Dim 416", fontsize = 20) 
+plt.text(-0.3,1.1, 'Prediction', rotation = 90)
+plt.text(-0.1,1.55, 'N') 
+plt.text(-0.1,0.55, 'P')
+plt.text(0.5, -0.1,'P')
+plt.text(1.5,-0.1, 'N')
+plt.show()
