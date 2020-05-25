@@ -1,0 +1,52 @@
+
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import os
+
+##For all tests 
+names = ['Weight', 'Iter', 'Animal', 'ID', 'TP', 'FP', 'FN', 'ACC']
+o_names = ['Weight', 'Iter', 'Precision', 'Recall', 'F1', 'TP', 'FP', 'FN', 'IoU', 'mAP']
+Iter = pd.Series(range(1000,43000,1000))
+Iter_lab = pd.Series(range(5000,43000,5000))
+
+##Function for Recall #TP/(TP+FN)-->TPR 
+def recall(test, rows): 
+    test['Iter'] = pd.to_numeric(test['Iter'])
+    test = test.sort_values(by=['Iter'])
+    TP = test.iloc[:,4]
+    TP = np.asarray(TP)
+    TP = TP.reshape(rows)
+    TP = pd.Series(TP)
+    FN = test.iloc[:,6]
+    FN = np.asarray(FN)
+    FN = FN.reshape(rows)
+    FN = pd.Series(FN)
+    TPFN = pd.concat([TP,FN], axis = 1)
+    Sum = TPFN.sum(axis=1)
+    Sum = np.asarray(Sum)
+    Sum = Sum.reshape(rows)
+    Sum = pd.Series(Sum)
+    reca = TP.div(Sum)
+    recall = pd.concat([Iter, reca], axis=1)
+    return(recall)
+    
+plot0 = recall(test_K3_C,42)
+plot1 = recall(test_K3_D,42)
+plot2 = recall(test_K3_H,42)
+plot3 = recall(test_K3_R,42)
+
+axes= plt.axes()
+plt.plot(plot0.iloc[:,[0]], plot0.iloc[:,[1]], color = 'firebrick', label = 'Car')
+plt.plot(plot1.iloc[:,[0]], plot1.iloc[:,[1]], color = 'darkgoldenrod', label = 'Deer')
+plt.plot(plot2.iloc[:,[0]], plot2.iloc[:,[1]], color = 'darkgreen', label = 'Human')
+plt.plot(plot3.iloc[:,[0]], plot3.iloc[:,[1]], color = 'darkturquoise', label = 'Rhino')
+plt.title('Knowsley Test 3 : Dim 416')
+plt.xlabel('Iteration')
+plt.ylabel('Recall')
+plt.ylim(0,1)
+plt.xlim(1000,42000)
+plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+axes.set_xticks(Iter_lab)
+plt.show()
