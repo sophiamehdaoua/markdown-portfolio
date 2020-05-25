@@ -10,7 +10,7 @@ o_names = ['Weight', 'Iter', 'Precision', 'Recall', 'F1', 'TP', 'FP', 'FN', 'IoU
 
 #Function to format the data for the barplot 
 def barformat(test):
-    values = test.loc[41,['Precision','Recall','F1']]
+    values = test.loc[41,['Precision','Recall','F1']] #taking results from last iteration 
     mAP = (test.loc[41,'mAP'])/100
     values.loc['mAP'] = mAP
     return(values)
