@@ -8,7 +8,7 @@ import os
 names = ['Weight', 'Iter', 'Animal', 'ID', 'TP', 'FP', 'FN', 'ACC']
 o_names = ['Weight', 'Iter', 'Precision', 'Recall', 'F1', 'TP', 'FP', 'FN', 'IoU', 'mAP']
 
-#Function to ormat the data for the barplot 
+#Function to format the data for the barplot 
 def barformat(test):
     values = test.loc[41,['Precision','Recall','F1']]
     mAP = (test.loc[41,'mAP'])/100
