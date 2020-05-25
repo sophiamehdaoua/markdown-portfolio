@@ -4,6 +4,12 @@ import numpy as np
 import pandas as pd
 import os
 
+##For all tests
+names = ['Weight', 'Iter', 'Animal', 'ID', 'TP', 'FP', 'FN', 'ACC']
+o_names = ['Weight', 'Iter', 'Precision', 'Recall', 'F1', 'TP', 'FP', 'FN', 'IoU', 'mAP']
+Iter = pd.Series(range(1000,43000,1000))
+Iter_lab = pd.Series(range(5000,43000,5000))
+
 #Function for formatting the data 
 def format(test, col, shape): 
 #this function can be used on any column for either test for plotting (x = iter, y = chosen column)
