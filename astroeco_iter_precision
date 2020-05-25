@@ -38,7 +38,6 @@ test_K3_C =pd.read_csv('car_test.txt', names = names, sep = " ")
 test_K3_D = pd.read_csv('deer_test.txt', names = names, sep = " ")
 test_K3_H = pd.read_csv('human_test.txt', names = names, sep = " ")
 test_K3_R = pd.read_csv('rhino_test.txt', names = names, sep = " ")
-test_K3 = pd.read_csv('overall_test.txt', names = o_names, sep = " ")
 #change final and last to 41/420000 respectively 
     
 plot0 = precision(test_K3_C,42)
